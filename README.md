@@ -51,6 +51,6 @@
 - create a folder lib in src/lib then you can create rules.js there or rules.ts for typescript
 - you can create a registerFormSchema for validation of the register form
 - to make it clear just read the docs of zod validations https://zod.dev/basics
-- console.log(validatedFields) //if we use this the validated not success will except a getter thats why se use validatedFields.error.flatten.fieldErrors to convert it into text in a array
+- console.log(validatedFields) //if we use this, the validatedFields if not success, it will expect a getter thats why se use validatedFields.error.flatten.fieldErrors to convert it into text in a array
 - in the useStateAction when submitting the form the [state] is the state of the form then you can grab the errors you set in your rules
 - in that state you can grab errors or data that you set to return in the client side like when it got an error you can return the old email and grab that using the state of useStateAction of react
