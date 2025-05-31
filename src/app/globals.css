@@ -51,7 +51,7 @@
     @apply p-6 rounded-lg shadow-lg bg-white mx-auto;
   }
   .btn-primary {
-    @apply text-white bg-indigo-600 px-14 py-1.5 rounded-md shadow-sm hover:bg-indigo-700 active:ring-2 ring-offset-1 ring-indigo-700 disabled:bg-slate-300 disabled:text-slate-100 disabled:cursor-not-allowed;
+    @apply text-white bg-indigo-600 px-14 py-1.5 rounded-md shadow-sm hover:bg-indigo-700 active:ring-2 ring-offset-1 ring-indigo-700 disabled:bg-slate-300 disabled:text-slate-100 disabled:cursor-not-allowed cursor-pointer;
   }
   .text-link {
     @apply text-sm text-indigo-600 hover:text-indigo-700 underline;
