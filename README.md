@@ -47,6 +47,17 @@
 - then in the server you must put ['user server'] on the top that will all the function must be run in the server only not in the client
 - when using "user server" in the server action you must put all function into async coz it all function in the server must be asynchronous and you must wait the server
 
+# Day 3
+- server only actions
+- in nextjs 15 components by default is server components
+- by putting [use client] directives it will make a client components
+- by putting use client in the client components then the component from the server you use use server then when you call that in client it will get an error
+- async and await are not yet supported in client components
+- @note all server component must be asynchronous
+- it will work to render a server component when you put that inside useEffect then use async function inside useEffect then put the component you want to use or render
+- @more strict the import "server-only"
+- the method above will get an error if you use component from the server into a client components
+- one example to use the server-only in our db.js and session.js
 
 # @form Validation with package zod
 - installing zod package [npm i zod] in the terminal

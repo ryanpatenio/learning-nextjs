@@ -50,7 +50,7 @@ export async function register(state, formData){
     });
 
     //create session
-    await createSession(results.insertedId);
+    await createSession(results.insertedId.toString());
     //redirect
     redirect('/dashboard');
 }
