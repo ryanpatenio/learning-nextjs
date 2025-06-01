@@ -21,3 +21,8 @@ export const registerFormSchema = z.object({
             })
         }
 });
+
+export const loginFormSchema = z.object({
+    email : z.string().email({ message : 'Please enter a valid email'}).trim(),
+    
+});

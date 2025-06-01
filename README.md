@@ -81,3 +81,13 @@
 
 # Redirect
 - next js has redirect function you must import it from next/navigation
+
+# Installing Jose (JWT) for cookies and session (stateless session)
+- [npm i jose]
+- create session in lib[session.js]
+- create a secret key in .env use [openssl rand -base64 32] to generate random key
+- in your session file get the secret key from .env then make that a encodedKey from the js new TextEncoder
+- then create a  function that will encrypt by using JWT from jose with Sign using your secret key that already change into encodedKey with algorithms of [HS256]
+- after that create a @decrypt function that will decrypt the encrypted session
+- create a function that will createSession using that encrypt function bind with your first arguments [userId] and store in cookies()
+- it will store jwt tokens in your cookies that name [session]
