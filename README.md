@@ -10,6 +10,7 @@
 -  [✅] Sessions
 -  [✅] Database - Mongo DB
 -  [✅] Fonts
+-  [✅] Active Links
 -  [] Authentication
 -  [] CRUD actions
 
@@ -130,3 +131,8 @@ const myFont = localFont({
 - then put in your body tags className= {myFont.className} to implement your own local font you want to use
 - if you have diff fonts you want to use you can pass an object array in the 2nd args in
 -  you can use font Poppins from next/font/google from nextjs
+
+# Active Links
+- usePathName from next/navigation [reacthooks] when using react hooks you must put directives above [useclient]
+- i set the navlink into a reusable components with two props [label,href]
+- then create a navigation components then put all the nav there coz in the future we use getAuth to not show login and register if the user is already login or register
