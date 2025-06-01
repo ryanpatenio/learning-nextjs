@@ -1,22 +1,23 @@
-# 🚀 Creating E-commerce Website using Laravel 12, Inertia and React js
+# 🚀 Learning Nextjs with MongoDB, JWT (Jose), Zod (validations) & bcrypt
 
 ## Course
 -  [✅] App Structure
 -  [✅] Pages
 -  [✅] Layouts
 -  [✅] Routes
--  [] Fonts
 -  [✅] Forms
--  [] Authentication
--  [] Cookies
--  [] Sessions
+-  [✅] Cookies
+-  [✅] Sessions
 -  [✅] Database - Mongo DB
+-  [✅] Fonts
+-  [] Authentication
 -  [] CRUD actions
+
 
 
 ## Steps by Steps Installation
 - [✅] npx create-next-app@latest
-- [] Change the .Js into Jsx coz we render html
+- [✅] Change the .Js into Jsx coz we render html
 
 ## Terminal 
 - npm run dev -- to start development
@@ -102,3 +103,30 @@
 - after that create a @decrypt function that will decrypt the encrypted session
 - create a function that will createSession using that encrypt function bind with your first arguments [userId] and store in cookies()
 - it will store jwt tokens in your cookies that name [session]
+
+# Implement own local fonts [google font]
+[
+    import localFont from 'next/font/local';
+
+const myFont = localFont({ 
+  src : [
+      {
+        path : "../fonts/Poppins-Bold.ttf",
+        weight : "600",
+        style : 'bold'
+      },
+      {
+        path : "../fonts/Poppins-Light.ttf",
+        weight : "200",
+        style : 'light'
+      },
+
+    ] 
+});
+] - this is how to use local font
+- using google font download from [fonts.google.com/specimen/Poppins]
+- create a folder fonts in src/fonts then put the font you like
+- then go to your layout then const myFont = localFont({ src : '../fonts/Poppins-Bold.ttf'}); use this
+- then put in your body tags className= {myFont.className} to implement your own local font you want to use
+- if you have diff fonts you want to use you can pass an object array in the 2nd args in
+-  you can use font Poppins from next/font/google from nextjs
