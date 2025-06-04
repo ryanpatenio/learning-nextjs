@@ -143,3 +143,17 @@ const myFont = localFont({
 - by matching the password you must use bcrypt compare(plainPassword, hashPassword from the collection or DB)
 - don't forget to convert it into string .string() to store _id in session coz by default from mongodb it is an object
 - then create a session
+
+# @typescript - Type.ts in @lib
+- a typescript for PostFormFields and PostFormError Response
+- in the createPost i put the void first coz i check the user if login then redirect into home page
+- The issue is that redirect() throws an exception, not returns a value — it never resolves the Promise normally.
+- TypeScript sees that and complains because redirect() is not compatible with PostErrorResponse | void
+- PostErrorResponse | void
+- in TypeScript, never represents a function that never returns (e.g. throws an error or redirects). Since redirect() throws internally, never tells TypeScript "this line stops execution."
+
+# Create Post
+- i add typescript in server to make it safety and readability
+- by adding post it is similar in register the only diff is to check if the user is logged in then he can insert data in DB then the userAuth from the session we can grab the userId to insert it in the post Table or Collections
+- i create a components for BlogForm then the actionState is a dynamic using props in handler
+

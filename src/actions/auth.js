@@ -5,6 +5,7 @@ import { getCollection } from "@/lib/db";
 import { loginFormSchema, registerFormSchema } from "@/lib/rules";
 import { redirect } from 'next/navigation';
 import { createSession } from '@/lib/sessions';
+import { cookies } from 'next/headers';
 
 export async function register(state, formData){
     //await new Promise ((resolve) => setTimeout(resolve,3000));
@@ -64,10 +65,10 @@ export async function login(state, formData){
     });
 
     //if any form fields invalid
-    if(!validatedFields.success){
+     if(!validatedFields.success){
         return {
-            errors: validatedFields.error.flatten().fieldErrors,
-            email: formData.get('email'),
+            errors : validatedFields.error.flatten().fieldErrors,
+            email : formData.get('email'),
         }
     }
     //extract validated data
@@ -93,4 +94,11 @@ export async function login(state, formData){
 
     //redirect 
     redirect('/dashboard');
+}
+
+
+export async function logout(){
+    const cookieStore = await cookies();
+    cookieStore.delete('session');
+    redirect('/');
 }

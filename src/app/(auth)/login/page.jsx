@@ -14,7 +14,7 @@ export default function Login(){
             <form action={action} className="space-y-4">
                 <div>
                     <label htmlFor="email">Email</label>
-                    <input type="text" name="email" defaultValue={state?.email} />
+                    <input type="text" name="email" defaultValue={state?.email} />                
                     {state?.errors?.email && 
                         <p className="error">{state.errors.email}</p>
                     }

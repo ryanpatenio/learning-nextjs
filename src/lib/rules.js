@@ -27,3 +27,15 @@ export const loginFormSchema = z.object({
     password : z.string().min(1, { message : 'Password is required'}).trim(),
     
 });
+
+export const PostFormSchema = z.object({
+    title : z.string()
+        .min(1, { message : "Title field is required"})
+        .max(100, { message : "Title can't be more than 100 characters!"})
+        .trim(),
+    
+    content :  z.string()
+        .min(1, { message : "Content field is required"})
+        .trim(),
+    
+});
