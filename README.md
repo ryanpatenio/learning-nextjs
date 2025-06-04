@@ -11,7 +11,7 @@
 -  [✅] Database - Mongo DB
 -  [✅] Fonts
 -  [✅] Active Links
--  [] Authentication
+-  [✅] Authentication
 -  [] CRUD actions
 
 
@@ -136,3 +136,10 @@ const myFont = localFont({
 - usePathName from next/navigation [reacthooks] when using react hooks you must put directives above [useclient]
 - i set the navlink into a reusable components with two props [label,href]
 - then create a navigation components then put all the nav there coz in the future we use getAuth to not show login and register if the user is already login or register
+
+# Login system
+- create another action state login
+- create loginFormSchema it is just like in laravel formRequest to validate the request then returns an error by using zod validation
+- by matching the password you must use bcrypt compare(plainPassword, hashPassword from the collection or DB)
+- don't forget to convert it into string .string() to store _id in session coz by default from mongodb it is an object
+- then create a session
