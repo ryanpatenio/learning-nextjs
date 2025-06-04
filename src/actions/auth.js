@@ -2,7 +2,7 @@
 
 import bcrypt from 'bcrypt';
 import { getCollection } from "@/lib/db";
-import { registerFormSchema } from "@/lib/rules";
+import { loginFormSchema, registerFormSchema } from "@/lib/rules";
 import { redirect } from 'next/navigation';
 import { createSession } from '@/lib/sessions';
 
@@ -52,5 +52,45 @@ export async function register(state, formData){
     //create session
     await createSession(results.insertedId.toString());
     //redirect
+    redirect('/dashboard');
+}
+
+export async function login(state, formData){
+
+    //Validated Form Fields
+    const validatedFields = loginFormSchema.safeParse({
+        email : formData.get('email'),
+        password : formData.get('password')
+    });
+
+    //if any form fields invalid
+    if(!validatedFields.success){
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+            email: formData.get('email'),
+        }
+    }
+    //extract validated data
+    const { email, password} = validatedFields.data;
+
+    //check if email is exist in DB
+    const userCollection  = await getCollection('users');
+    if( ! userCollection ){
+        return {
+            errors: { email : "server error!"}
+        };
+    }
+    const existingUser = await userCollection.findOne({email});
+    if(! existingUser ) return {errors : {email : 'Invalid credentials'}};
+
+    //match the password
+    const matchedPassword = await bcrypt.compare(password,existingUser.password);
+    if(!matchedPassword) return {errors : {email : "Invalid credentials"}};
+
+    //create session
+    await createSession(existingUser._id.toString());
+    console.log(existingUser)
+
+    //redirect 
     redirect('/dashboard');
 }

@@ -3,7 +3,7 @@ import "server-only"
 import { MongoClient, ServerApiVersion } from "mongodb";
 
 if(!process.env.DB_URI){
-    throw new Error('Mongod URI not found!');
+    throw new Error('MongoDB URI not found!');
 }
 
 const client = new MongoClient(process.env.DB_URI,{
