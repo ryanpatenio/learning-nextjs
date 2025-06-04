@@ -60,7 +60,7 @@ export async function createPost(_state : unknown, formdata : FormData): Promise
         };
     }
 
-    redirect('/dashboard');
+    redirect('/'); //redirect to Home
 }
 
 export async function updatePost(_state: unknown, formdata : FormData): Promise < void | PostErrorResponse >{
