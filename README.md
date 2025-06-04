@@ -151,9 +151,26 @@ const myFont = localFont({
 - TypeScript sees that and complains because redirect() is not compatible with PostErrorResponse | void
 - PostErrorResponse | void
 - in TypeScript, never represents a function that never returns (e.g. throws an error or redirects). Since redirect() throws internally, never tells TypeScript "this line stops execution."
+- Concept	Explanation interface vs type	Use [interface] for [objects], [type] for [flexibility] or [primitives]
+ # @example [TS]
+  interface User {
+    id: string;
+    name: string;
+  }
+
+  type ID = string | number;
+
+  type UserWithRole = User & { role: string };
 
 # Create Post
 - i add typescript in server to make it safety and readability
 - by adding post it is similar in register the only diff is to check if the user is logged in then he can insert data in DB then the userAuth from the session we can grab the userId to insert it in the post Table or Collections
 - i create a components for BlogForm then the actionState is a dynamic using props in handler
+
+# Read or Display Data [Posts]
+- by passing props you must use {props} or else it will not get the data
+- Why {}? Because props are just a JavaScript object under the hood
+- When calling a regular JavaScript/TypeScript function, parameters are passed by position, not by object unless explicitly required.
+- You only use {} if the function expects an object:
+- sort({ $natural: -1 }) mongo db reverse array or in laravel .latest()
 
