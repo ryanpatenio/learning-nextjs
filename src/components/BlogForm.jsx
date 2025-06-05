@@ -1,8 +1,20 @@
 "use client"
-import { useActionState } from "react"
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect } from "react"
+import toast from "react-hot-toast";
 
 export default function BlogForm({handler}){
-    const [state, action , isPending] = useActionState(handler,undefined)
+    const [state, action , isPending] = useActionState(handler,undefined);
+    const  router = useRouter();
+
+  useEffect(() => {
+    if (state?.message) {
+        toast.success(state.message);
+        setTimeout(() => {
+            router.push('/');
+        }, 1000);
+    }
+}, [state]);
 
     return (
         <form action={action} className="space-y-4">
