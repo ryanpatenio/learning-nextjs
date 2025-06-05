@@ -14,7 +14,7 @@ type Post = {
 };
 
 
-export async function createPost(_state : unknown, formdata : FormData): Promise< void | PostErrorResponse> {
+export async function createPost(_state : unknown, formdata : FormData): Promise<PostErrorResponse | { message: string }> {
     //Check if user is logged in
     const user = await getAuthUser();
     if(!user){
@@ -60,7 +60,10 @@ export async function createPost(_state : unknown, formdata : FormData): Promise
         };
     }
 
-    redirect('/'); //redirect to Home
+    //return a message
+    return {
+        message : "Post created successfully!"
+    };
 }
 
 export async function updatePost(_state: unknown, formdata : FormData): Promise < void | PostErrorResponse >{

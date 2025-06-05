@@ -22,11 +22,14 @@
 
 ## Terminal 
 - npm run dev -- to start development
+- npm install react-hot-toast #for Pop up notification
+
 
 ## 🛠️ Package  I'm Using
 - Jose (JWT)
 - zod for Validation
 - bcrypt
+- react-hot-toast [Notification]
 
 
 ## 🧠 Notes & Learnings
@@ -183,3 +186,27 @@ const myFont = localFont({
 - then pass it in the PostCard components
 - use ternary operator to check if the url params is valid
 - I put a custom loading inside the app [loading.jsx] it will be default loading state
+
+# Loading & suspense from react
+- without loading file in the app/loading.jsx if you use suspense from react with fallback return loading <p>loading...<p> it will shows loading the p tags in that specific component you want to render if that components fetching data from the DB like mongoDB atlas
+- suspense from react lets you display a fallback until its children have finished loading
+- but if you use loading state or [loading.jsx] in the app/ it will wrap all children with this loading it will make a default loading file or animation
+
+# nextjs Dynamic
+- import dynamic from 'next/dynamic';
+
+const PostCard = dynamic(() => import('@/components/PostCard'), {
+  suspense: true
+});
+- Imported at runtime only when needed
+- Supports code-splitting
+- Allows Suspense fallback UI
+- Reduces JS bundle size
+- Great for heavy components (charts, modals, 3rd party libs)
+
+# install react-hot-toast
+- link https://react-hot-toast.com/
+- npm i react-hot-toast
+- then import { Toaster } from "react-hot-toast"; in your main layout
+- then <Toaster position="top-center" /> inside you main div or anywhere you want
+- please see full docs in the provided link
