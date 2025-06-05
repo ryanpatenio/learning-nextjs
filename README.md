@@ -174,3 +174,12 @@ const myFont = localFont({
 - You only use {} if the function expects an object:
 - sort({ $natural: -1 }) mongo db reverse array or in laravel .latest()
 
+# Show Data by clicking specific Post
+- by making the folder wrap into two array bracket [id] the [id] is a folder and inside it make a file page
+- so in the url it will make params
+- to get the url params you use a props params and this is a promise
+- then grab the id params in the url or destructure it using {id} = await params;
+- then get the collections from the mongodb atlas then find one query from mongodb filter by id
+- then pass it in the PostCard components
+- use ternary operator to check if the url params is valid
+- I put a custom loading inside the app [loading.jsx] it will be default loading state
