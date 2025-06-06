@@ -1,6 +1,7 @@
+"use server"
 import Link from "next/link";
 
-export default function PostCard({post}){
+export default async function PostCard({post}){
     return (
         <div className="border border-slate-400  p-4 rounded-md shadow-lg h-full">
             <p className="text-slate-600 text-xs">
@@ -13,3 +14,4 @@ export default function PostCard({post}){
         </div>
     )
 }
+// by default this component is a server side so that i can pass a server data into this component from Home.jsx[page.jsx]

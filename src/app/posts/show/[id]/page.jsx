@@ -3,10 +3,10 @@ import { getCollection } from "@/lib/db";
 import { ObjectId } from "mongodb";
 
 export default async function Show({params}){
- const { id } = params;
+ const { id } = await params;
 
  const postCollection = await getCollection('posts');
- const post = id.length === 24 ? await postCollection.findOne({
+ const post = id.length === 24 ? await postCollection?.findOne({
     _id : ObjectId.createFromHexString(id)
  }) : null;
 
