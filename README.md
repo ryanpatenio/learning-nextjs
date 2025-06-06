@@ -210,3 +210,41 @@ const PostCard = dynamic(() => import('@/components/PostCard'), {
 - then import { Toaster } from "react-hot-toast"; in your main layout
 - then <Toaster position="top-center" /> inside you main div or anywhere you want
 - please see full docs in the provided link
+
+# adding toast Notification using redirect() with params from nextjs
+- redirect('/?error=unauthorize')
+- const searchParams = useSearchParams();
+  const hasShown = useRef(false); // like a box that stores a value without causing re-renders.
+
+  useEffect(() => {
+    if (hasShown.current) return; // skip if already shown
+    const error = searchParams.get('error');
+
+    if (error === 'unauthorized') {
+      toast.error("You can't edit this post that you don't own!");
+      hasShown.current = true;
+    }
+  }, [searchParams]);
+- but you can only use this in client side not in server
+
+# Update Function
+- use the components blog form then pass new params [post] into it and use that in the defaultFormData but make sure to put the state? first before that || post?.title to get the state form data first, ex. if you edit the title then you submit without content or empty it will stay the text that you added
+- in the edit page with dynamic id by default of nextjs router you put a [params] in that component to use that or get that from the urlParams post/232sdsd
+- then use an await to avoid error
+- then destructure it and grab that id [name of the folder] posts/[id]
+- then use a server function getCollection from MongoDB
+- check if the id is length === 24 if true then query
+- then convert the params id into a objectId by MongoDB coz when querying using id in MongoDB it must be an object then if you want to use it or compare it in the client side or server side it is advisable to convert that into a string .toString()
+
+# ✅ When you do need to serialize: Server Data or from Mongo DB data into client component
+- You need to JSON.parse(JSON.stringify(...)) only when:
+- You're passing data from Server Component to Client Component via props
+- You're using fetch/getServerSideProps/API route that sends JSON responses
+- You want to store MongoDB data into localStorage or JSON.stringify it
+- ✅ You didn’t need to convert post to JSON because both Home and PostCard are Server Components
+- ❌ You must convert it (or at least serialize _id) if you're passing it to a Client Component
+- 🔥 Rule of thumb: Anything going to the client must be serializable
+
+
+
+ 
