@@ -14,7 +14,7 @@ export default function BlogForm({handler , post}){
             toast.error(state.message);
             } else {
             toast.success(state.message);
-            router.push('/');
+            router.push('/dashboard');
         
           }
         }

@@ -4,7 +4,7 @@ import { getCollection } from "@/lib/db";
 
 export default async function Home() {
   const postCollection = await getCollection('posts');
-  const posts = await postCollection.find().sort({ $natural: -1 }).toArray();
+  const posts = await postCollection?.find().sort({ $natural: -1 }).toArray();
    
   if(posts){
     return (

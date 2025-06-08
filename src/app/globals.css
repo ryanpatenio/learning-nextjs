@@ -53,6 +53,15 @@
   .btn-primary {
     @apply text-white bg-indigo-600 px-14 py-1.5 rounded-md shadow-sm hover:bg-indigo-700 active:ring-2 ring-offset-1 ring-indigo-700 disabled:bg-slate-300 disabled:text-slate-100 disabled:cursor-not-allowed cursor-pointer;
   }
+  .btn-sm{
+    @apply bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-sm shadow-lg text-sm mr-2 cursor-pointer
+  }
+  .btn-sm-red{
+    @apply bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-sm shadow-lg text-sm mr-2 cursor-pointer
+  }
+  .btn-sm-green{
+    @apply bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-sm shadow-lg text-sm mr-2 cursor-pointer
+  }
   .text-link {
     @apply text-sm text-indigo-600 hover:text-indigo-700 underline;
   }
@@ -74,4 +83,26 @@
   .round-btn {
     @apply w-8 h-8 overflow-auto rounded-full bg-slate-100 focus:outline-none focus:ring-1 focus:ring-slate-100 focus:ring-offset-2 focus:ring-offset-slate-800;
   }
+  .custom-table {
+    @apply bg-white rounded-xl shadow-md
+  }
+  .custom-thead-tr{
+    @apply bg-gray-100 text-gray-600 uppercase text-sm leading-normal
+  }
+  .custom-thead{
+    @apply py-3 px-6 text-left
+  }
+  .custom-tbody{
+    @apply text-gray-700 text-sm font-light
+  }
+  .custom-tbody-tr{
+    @apply border-b border-gray-200 hover:bg-gray-50
+  }
+  .custom-td{
+    @apply py-3 px-6 text-left
+  }
+  .custom-td-action{
+    @apply py-3 px-6 text-center
+  }
+  
 }
