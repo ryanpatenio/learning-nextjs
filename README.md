@@ -260,6 +260,18 @@ const PostCard = dynamic(() => import('@/components/PostCard'), {
 - when its expires create another one name : admin_user
 - then set put old password there
 - all you need to choose in the form is the custom roles or built in role [atlas-admin]
+- const client = new MongoClient(uri);
+- await client.connect();
+- when using that You’re opening a new connection every time. avoid using this
+- convert it into a singleton connection pattern
+
+| 🔍 Problem                             | 💡 Solution                                              |
+| -------------------------------------- | -------------------------------------------------------- |
+| Calling `client.connect()` every time  | Cached `clientPromise` ensures one persistent connection |
+| Hot reload in dev creates many clients | Global variable prevents reconnecting on reload          |
+| Risk of unclosed connections           | Connection is reused, never closed until app exit        |
+- i Add NODE_ENV in the env for production or dev fro the DB configuration
+
  
 # Hooks
 - usePagination
@@ -274,3 +286,24 @@ const PostCard = dynamic(() => import('@/components/PostCard'), {
 - you can use a client components in the server components
 - ex: the PostTable components i use it in the dashboard which is a server components
 - but note before you can pass a objects array from server components into a client it must be converted into JSON to avoid conflict or errors coz from the Mongodb the data is an object[objectId]
+- in Mongo DB you must set the db config to Global when your environment is in [development] to avoid refetching the data from the mongo
+- set into a global but in production avoid use global to avoid memory leaks
+- revalidatedPath can only be use in the server component not in the client
+- revalidatedPath refresh the cache data within specific routes
+- the equiv. of revalidatedPath is the useRouter from react it will refetch the data into cache
+- router.push or router.refresh
+
+
+# Delete Post
+- store postId in the hidden tag using form
+- check if the user is the owner of this post
+- check if this post is exist in db
+- create a useStateAction from react and use that in the postTable for the pop up notification and disabling the button delete
+- use a useStateHook from react to get and store the post id from the delete form if it is the same as in the selected delete button to target to disabled it when submitting the form
+- form={action} is for server when you use a client side function it must be pass using onSubmit
+- You're using a form action with a client-side function (handleDelete), which won’t work properly unless it’s marked as a server action using use server, or handled entirely via onSubmit.
+
+- Since handleDelete is a client-side function, the correct way to handle it is to use onSubmit instead of action.
+- 🔍 Why?
+- form action={fn} is used for server actions in Next.js.
+- Since handleDelete is a client function, it must be triggered via onSubmit.
