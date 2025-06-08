@@ -35,3 +35,18 @@
 //     </form>
 //   );
 // }
+
+// TypeScript Generic Type Placeholder
+// type Post = {
+//   _id: string;
+//   title: string;
+//   content: string;
+// };
+
+// const postFromDb = {
+//   _id: new ObjectId().toString(),
+//   title: 'Hello',
+//   content: 'World',
+// };
+
+// const safePost = convertToJSON<Post>(postFromDb); // 💡 T is Post

@@ -235,6 +235,8 @@ const PostCard = dynamic(() => import('@/components/PostCard'), {
 - then use a server function getCollection from MongoDB
 - check if the id is length === 24 if true then query
 - then convert the params id into a objectId by MongoDB coz when querying using id in MongoDB it must be an object then if you want to use it or compare it in the client side or server side it is advisable to convert that into a string .toString()
+- i add a type type for a Message with two properties the {message, type : msgType } for promise Type that can be used in updating and adding a post
+-
 
 # ✅ When you do need to serialize: Server Data or from Mongo DB data into client component
 - You need to JSON.parse(JSON.stringify(...)) only when:
@@ -246,5 +248,29 @@ const PostCard = dynamic(() => import('@/components/PostCard'), {
 - 🔥 Rule of thumb: Anything going to the client must be serializable
 
 
+# Result<T> -  discriminated union type or Result pattern
+- in Typescript the function<T> is the parameters the type of parameters you want
+- by Setting T it is a generic parameters which you can pass any type in this function when you didnt set any type of that
+- example createPost<Post>(params) the <Post> is the type you want that this function params must be strict to accept that kind of type you set
+- export default function convertToJSON<T>(data: T): T {
+  return JSON.parse(JSON.stringify(data));
+}
 
+# !MongoDB database access Exp
+- when its expires create another one name : admin_user
+- then set put old password there
+- all you need to choose in the form is the custom roles or built in role [atlas-admin]
  
+# Hooks
+- usePagination
+# Components
+- PostTable
+- TableComponent
+
+# Dashboard
+- is a server components
+
+# 🧠  Discoveries || Learnings
+- you can use a client components in the server components
+- ex: the PostTable components i use it in the dashboard which is a server components
+- but note before you can pass a objects array from server components into a client it must be converted into JSON to avoid conflict or errors coz from the Mongodb the data is an object[objectId]
