@@ -1,33 +1,40 @@
-import "server-only"
-
+import "server-only";
 import { MongoClient, ServerApiVersion } from "mongodb";
 
-if(!process.env.DB_URI){
-    throw new Error('MongoDB URI not found!');
+if (!process.env.DB_URI) {
+  throw new Error("MongoDB URI not found!");
 }
 
-const client = new MongoClient(process.env.DB_URI,{
-    serverApi: {
+const uri = process.env.DB_URI;
+
+const options = {
+  serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
   },
-});
+};
 
-//connections
-async function getDB(dbName) {
-    try {
-        await client.connect();
-        console.log(">>>Connected to DB <<<");
-        return client.db(dbName);
-    } catch (error) {
-        console.log(error)
-    }
+// Global client cache (only in dev)
+let client;
+let clientPromise;
+
+if (process.env.NODE_ENV === "development") {
+    //console.log("development");   
+  if (!global._mongoClientPromise) {
+    client = new MongoClient(uri, options);
+    global._mongoClientPromise = client.connect();
+  }
+  clientPromise = global._mongoClientPromise;
+} else {
+  // In production, don't use global to avoid memory leaks
+  console.log("production");
+  client = new MongoClient(uri, options);
+  clientPromise = client.connect();
 }
-//getter
-export async function getCollection(collectionName){
-    const db = await getDB('next_blog_db'); //db name && if not exist will create this db
-    if (db) return db.collection(collectionName);
-    
-    return null;
+
+export async function getCollection(collectionName) {
+  const client = await clientPromise;
+  const db = client.db("next_blog_db");
+  return db.collection(collectionName);
 }

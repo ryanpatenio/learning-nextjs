@@ -151,3 +151,48 @@ export async function updatePost(_state: unknown, formdata : FormData): Promise 
         type : 'success'
     };
 }
+
+export async function deletePost(_state:unknown, formData: FormData): Promise<Message> {
+    const user = await getAuthUser(); // from cookies
+    if(!user){
+        redirect("/"); //redirect to dashboard
+    }
+
+    const postId = formData.get('postId');
+    // Ensure postId is a string
+    if (typeof postId !== 'string') {
+        return {
+            message : "Invalid Id",
+            type : 'error'
+        };
+    }
+    //find users Post
+    const postCollection = await getCollection('posts');
+    const post = await postCollection.findOne({
+        _id : new ObjectId(postId)
+    });
+
+    //check Post Ownership
+    if(user.userId !== post.userId.toString()){
+        return {
+            message : "you don't own this post",
+            type: "error"
+        }
+    }
+
+    try {
+        await postCollection.findOneAndDelete({
+            _id : post._id
+        });
+    } catch (error) {
+        return {
+            message: "Failed to Delete this Post",
+            type : "error"
+        };
+    }
+    //success
+    return {
+        message : 'Post deleted successfully!',
+        type : 'success'
+    };
+} 
