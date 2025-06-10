@@ -4,7 +4,7 @@ import Pagination from './Pagination';
 import { usePagination } from '@/hooks/usePagination';
 import Link from 'next/link';
 import { deletePost } from '@/actions/post';
-import { useActionState, useState, useEffect } from 'react';
+import { useActionState, useState, useEffect, startTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
@@ -15,8 +15,7 @@ export default function PostsTable({ posts }) {
     paginatedData,
     goToPage,
   } = usePagination(posts, 5);
- 
-  const [submittingId, setSubmittingId] = useState(null);
+
   const [state, deleteAction, isPending] = useActionState(deletePost, undefined);
   const router = useRouter();
 
@@ -26,13 +25,22 @@ export default function PostsTable({ posts }) {
           toast.error(state.message);
           } else {
           toast.success(state.message);
-           router.refresh();
-                       
+          router.refresh();                      
         }
       }
   }, [state]);
-  
-  
+
+  const handleDelete = (postId) => {
+    if(window.confirm("Delete this post?")){
+      const formData = new FormData();
+      formData.append('postId',postId);
+      startTransition(() => {
+        deleteAction(formData);
+      });
+    }
+  }
+
+ 
   return (
     <>
            <Table columns={['#', 'Title', 'Content', 'Action']}>
@@ -44,17 +52,13 @@ export default function PostsTable({ posts }) {
               <td className="py-3 px-6">{post.content}</td>
               <td className="custom-td-action space-x-2">
                 <Link className="btn-sm" href={`/posts/edit/${post._id}`}>Edit</Link>
-                <Link className="btn-sm-green" href={`/posts/show/${post._id}`}>View</Link>
-                <form action={deleteAction}>
-                  <input type="hidden" name="postId" value={post._id} />
+                <Link className="btn-sm-green" href={`/posts/show/${post._id}`}>View</Link>               
                   <button
                     className="btn-sm-red"
-                    disabled={isPending && submittingId === post._id}
-                    onClick={() => setSubmittingId(post._id)}
+                    onClick={() => handleDelete(post._id)}
                   >
-                    {isPending && submittingId === post._id ? 'Deleting...' : 'Delete'}
+                    Delete
                   </button>
-                </form>
               </td>
             </tr>
           );
