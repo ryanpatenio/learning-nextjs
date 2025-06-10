@@ -12,7 +12,7 @@
 -  [✅] Fonts
 -  [✅] Active Links
 -  [✅] Authentication
--  [] CRUD actions
+-  [✅] CRUD actions
 
 
 
@@ -307,3 +307,28 @@ const PostCard = dynamic(() => import('@/components/PostCard'), {
 - 🔍 Why?
 - form action={fn} is used for server actions in Next.js.
 - Since handleDelete is a client function, it must be triggered via onSubmit.
+- i added a window confirm delete post dialog
+- and using a function for handle Delete
+- by using useActionState by react it must be submit thru forms but if you use that inside in your function you must wrap it using [startTransition] then put that inside deleteAction(formData);
+- then pass it using formData and note that since i pass the postId in my action for deleting post you must append it in the formData with the same name [postId];
+- to make sure the logic from action will not be affected since the postId is really important in deleting
+
+
+# Middleware
+- in middleware it must be place in the src/middleware.ts or js
+- initialize the public routes and protected routes for users authenticated and not
+- since im using typescript the params req: NextRequest it must be like that if your not then the [req] is enough
+- then i use matcher 
+- matcher: [
+  '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
+],
+- this This is a regex-based matcher that says:
+- Run the middleware on everything, except:
+- /api/** – API routes (typically stateless, handled separately)
+- /_next/static/** – compiled static files (JS, CSS, etc.)
+- /_next/image/** – images optimized by Next.js
+- favicon.ico, sitemap.xml, robots.txt – SEO and metadata files
+- I use some for scalable and cleaner for the 
+- I use startWith for example if the protected routes ['/dashboard'] when i use startWith all of its subfolder will be included whenever you use that logic. if  your logic if not auth cant access in that routes then all the subfolder of the /dashboard will included also
+- I add publicSubPath for the [posts/show] that can be accessible in public by using !publicSubPath
+
