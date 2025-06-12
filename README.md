@@ -332,3 +332,5 @@ const PostCard = dynamic(() => import('@/components/PostCard'), {
 - I use startWith for example if the protected routes ['/dashboard'] when i use startWith all of its subfolder will be included whenever you use that logic. if  your logic if not auth cant access in that routes then all the subfolder of the /dashboard will included also
 - I add publicSubPath for the [posts/show] that can be accessible in public by using !publicSubPath
 
+# Last Stages || Completed
+- I add a window confirmation in the logout button and i make it a component coz it runs a client coz in the navigation runs server component to avoid conflict or errors
